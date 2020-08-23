@@ -1,0 +1,46 @@
+<!-- BOTON PERSONALIZADO CON SCRIPT -->
+<p>
+	Ingresá en este botón pagar:
+	<br /> 
+	Número de Compra: <span id="ordernumber">%order_number%</span>
+	<br /> Total: <span id="ordertotal">%total%</span>
+	<br />
+	<br /> 
+	<span class="hidden-xs"> 
+		<a class="button btn btn-warning" target="_blank" href="https://web.whatsapp.com/send?l=es&phone=+5492612787817&text=Hola, quiero pagar mi compra N° %order_number%, por el monto de %total%." title="WhatsApp" rel="nofollow">Terminar de Pagar</a> 
+	</span> 
+	<span class="visible-xs"> 
+		<a id="botontelefono" class="button btn btn-warning" target="_blank" href="whatsapp://send?l=es&phone=+5492612787817&text=Hola, quiero pagar mi compra N° %order_number%, por el monto de %total%." title="WhatsApp" rel="nofollow">Terminar de Pagar</a> 
+	</span>
+	<br />
+	<br />
+</p>
+
+<script>
+	/* Script que toma los valores de las variables y los imprime en el HTML.
+	Tiene un ligero retraso de medio segundo para evitar un bug del módulo. De esta forma se puede imprimir en el aplicación móvil los valores del número de pedido y el monto total del mismo.
+	*/
+
+	window.addEventListener("load", temporizador);
+
+	// Constantes
+	const botonTelefono = document.getElementById("botontelefono");
+	const orderNumber = document.getElementById("ordernumber").innerText;
+	const orderTotal = document.getElementById("ordertotal").innerText;
+	const mensajeLimpio = `Hola, quiero pagar mi compra N° ${orderNumber}, por el monto de ${orderTotal}.`;
+	const mensajeTransformado = encodeURIComponent(mensajeLimpio);
+	
+	// Da medio segundo para que cambie el contenido del atributo href
+	function temporizador()
+	{
+	    setTimeout(botoneador, 500);
+	    return;
+	}
+
+	function botoneador()
+	{
+	    botonTelefono.href = `whatsapp://send?l=es&phone=+5492612787817&text=${mensajeTransformado}`;
+	    console.log(botonTelefono.href);
+	}
+	// 2612787817
+</script>
